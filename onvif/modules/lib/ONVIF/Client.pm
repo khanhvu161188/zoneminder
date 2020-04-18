@@ -260,7 +260,7 @@ sub set_credentials {
 sub create_services {
   my ($self) = @_;
 
-  #$self->get_service_urls();
+  $self->get_service_urls();
 
   if ( defined $self->service('media', 'url') ) {
     $self->set_service('media', 'ep', ONVIF::Media::Interfaces::Media::MediaPort->new({
