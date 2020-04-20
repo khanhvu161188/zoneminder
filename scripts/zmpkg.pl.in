@@ -36,7 +36,7 @@ use DBI;
 use POSIX;
 use Time::HiRes qw/gettimeofday/;
 use autouse 'Pod::Usage'=>qw(pod2usage);
-
+use Time::HiRes qw(usleep);
 # Detaint our environment
 $ENV{PATH}  = '/bin:/usr/bin:/usr/local/bin';
 $ENV{SHELL} = '/bin/sh' if exists $ENV{SHELL};
@@ -189,7 +189,8 @@ if ( $command =~ /^(?:start|restart)$/ ) {
 
     zmMemTidy();
     runCommand('zmdc.pl startup');
-
+    #need to wait 20 seconds to ensure zmdc start success
+    usleep(20); 
     my $Server = undef;
     my $sql;
     my @values;
